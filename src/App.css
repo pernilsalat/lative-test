@@ -1,0 +1,33 @@
+html,
+body {
+    font-family: 'Verdana', sans-serif;
+    font-size: 1rem;
+    background-color: #fafafa;
+    color: #666666;
+    height: 100%;
+}
+
+#root, .app {
+    height: 100%;
+}
+
+.formPanel {
+    height: 300px;
+}
+
+.header {
+    text-align: center;
+    font-size: 3rem;
+    color: #3b9fc2;
+    margin-top: 3rem;
+    margin-bottom: 3rem;}
+
+.logo {
+    width: 120px;
+    height: 30px;
+}
+
+.results {
+    background-color: #3b9fc2;
+    height: calc(100% - 300px);
+}
