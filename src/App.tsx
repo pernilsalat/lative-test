@@ -18,7 +18,7 @@ function App() {
                 <Container className='p-3'>
                     <Nav>
                         <Nav.Item className='logo'>
-                            <img src='/images/lative-logo.png' alt='Lative Software' />
+                            <img src='/images/lative-logo.svg' alt='Lative Software' />
                         </Nav.Item>
                     </Nav>
                     <h1 className='header'>Growth Ranking of U.S. States</h1>

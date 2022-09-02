@@ -12,22 +12,24 @@ body {
 }
 
 .formPanel {
-    height: 300px;
+    height: 20rem;
 }
 
 .header {
     text-align: center;
     font-size: 3rem;
-    color: #3b9fc2;
+    color: #8aa5d1;
     margin-top: 3rem;
     margin-bottom: 3rem;}
 
 .logo {
-    width: 120px;
-    height: 30px;
+    width: 9rem;
+    height: 3rem;
+    position: relative;
+    left: -1rem;
 }
 
 .results {
-    background-color: #3b9fc2;
+    background-color: #8aa5d1;
     height: calc(100% - 300px);
 }
