@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import { Dispatch, useEffect, useReducer } from 'react';
 import { ResponseState as State } from '../types';
 import { identity } from '../utils';
 
@@ -36,7 +36,7 @@ export function useFetch<T = unknown>(
   options?: Options<T>
 ): State<T> {
   const dataParser = options?.dataParser || identity;
-  const [state, dispatch]: [State<T>, React.Dispatch<Action<T>>] = useReducer(
+  const [state, dispatch]: [State<T>, Dispatch<Action<T>>] = useReducer(
     fetchReducer<T>,
     getInitialState<T>()
   );

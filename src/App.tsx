@@ -1,5 +1,5 @@
 /* Libraries */
-import React, { useRef } from 'react';
+import React, { Dispatch, SetStateAction, useMemo, useState } from 'react';
 
 /* Components */
 import Container from 'react-bootstrap/Container';
@@ -8,19 +8,26 @@ import Nav from 'react-bootstrap/Nav';
 /* Styles */
 import './App.scss';
 import { useFetchMesures } from './hooks/useFetchMesures';
-import { Measurements, ResponseState } from './types';
-import { Filters } from './components/filters';
+import { CardData, FiltersForm, Measurements, ResponseState } from './types';
+import { Filters, initialForm } from './components/filters';
+import { Card } from './components/card';
+import { postProcessMeasures } from './utils';
+import { Grid } from './components/grid';
 
 function App(): JSX.Element {
-  // const [form, setForm] = useState({});
-  const { data }: ResponseState<Measurements> = useFetchMesures({
-    measures: 'Property Value',
-    year: 2018,
-    period: 2,
-  });
-  const formRef: React.MutableRefObject<HTMLFormElement | null> = useRef(null);
+  const [form, setForm]: [FiltersForm, Dispatch<SetStateAction<FiltersForm>>] =
+    useState<FiltersForm>(initialForm);
 
-  console.log({data}, formRef); // eslint-disable-line
+  const { data, loading }: ResponseState<Measurements> = useFetchMesures(form);
+
+  // const cardsData: CardData[] = postProcessMeasures(data || [], form.measures);
+  const cardsData: CardData[] = useMemo<CardData[]>(() => {
+    return postProcessMeasures(data || [], form.measures);
+  }, [data]);
+
+  // const asd = data || [];
+  // console.log(...asd.filter(({ State }) => State === 'Alabama')); // eslint-disable-line
+  // console.log(cardsData); // eslint-disable-line
 
   return (
     <div className='app'>
@@ -32,11 +39,16 @@ function App(): JSX.Element {
             </Nav.Item>
           </Nav>
           <h1 className='header'>Growth Ranking of U.S. States</h1>
-          <Filters />
+          <Filters onChange={setForm} />
         </Container>
       </div>
-      <div className='results'>
-        <Container />
+      <div className='results p-3 overflow-auto d-flex justify-content-center'>
+        {loading && <div className='text-white'>loading...</div>}
+        {!loading && (
+          <Grid data={cardsData}>
+            {(cardData: CardData) => <Card {...cardData} />}
+          </Grid>
+        )}
       </div>
     </div>
   );

@@ -1,46 +1,46 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useCallback,
+  useRef,
+} from 'react';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { FiltersForm, FormField, FormValue } from '../types';
 
-// interface FormElement {
-//   title: FormField | null | undefined;
-// }
-export function Filters(): JSX.Element {
-  const [form, setForm]: [
-    FiltersForm,
-    React.Dispatch<React.SetStateAction<FiltersForm>>
-  ] = useState<FiltersForm>({
-    year: 2019,
-    measures: 'Household Income',
-    period: 1,
-  });
+export const initialForm: FiltersForm = {
+  year: 2019,
+  measures: 'Household Income',
+  period: 1,
+};
 
-  useEffect(() => {
-    console.log({form}); // eslint-disable-line
-  }, [form]);
-
+interface FilterProps {
+  onChange: Dispatch<SetStateAction<FiltersForm>>;
+}
+export function Filters({ onChange }: FilterProps): JSX.Element {
   const handleFormChange = useCallback(
-    (e: React.ChangeEvent<HTMLFormElement>): void => {
+    (e: ChangeEvent<HTMLFormElement>): void => {
       const title: FormField = e.target.title as FormField;
       const targetValue = e.target.value;
       const value: FormValue = parseInt(targetValue, 10) || targetValue;
 
-      console.log(title, value); // eslint-disable-line
-      if (form[title] === value) return;
+      onChange((prevForm: FiltersForm): FiltersForm => {
+        let newForm = prevForm;
 
-      setForm(
-        (prevForm: FiltersForm): FiltersForm => ({
-          ...prevForm,
-          [title]: value,
-        })
-      );
+        if (prevForm[title] !== value) {
+          newForm = { ...prevForm, [title]: value };
+        }
+
+        return newForm;
+      });
     },
-    []
+    [onChange]
   );
 
-  const formRef: React.MutableRefObject<HTMLFormElement | null> = useRef(null);
+  const formRef: MutableRefObject<HTMLFormElement | null> = useRef(null);
 
   return (
     <Form ref={formRef} onChange={handleFormChange}>
