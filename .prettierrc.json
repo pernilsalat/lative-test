@@ -11,5 +11,6 @@
     "useTabs": false,
     "printWidth": 120,
     "endOfLine": "auto",
-    "indentStyle": "space"
+    "indentStyle": "space",
+    "bracketSameLine": false
 }

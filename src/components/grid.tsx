@@ -1,22 +1,27 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 
-interface Props {
-  data: any[];
-  children: (value: any) => JSX.Element;
+interface Props<T> {
+  data: T[];
+  children: (value: T) => JSX.Element;
 }
-export function Grid({ data, children }: Props): JSX.Element {
+export function Grid<T>({ data, children }: Props<T>): JSX.Element {
   return (
     <Container
-      fluid
+      className='justify-content-center'
       style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gridTemplateRows: 'repeat(5, 1fr)',
-        gridColumnGap: '15px',
+        gridTemplateColumns: 'repeat(2, 1fr)',
         gridGap: '15px',
       }}>
-      {data.map((d, index) => children({ ...d, key: index }))}
+      {data.map((d: T, index: number) => (
+        <div
+          className='grid-item'
+          key={`grid-item-${index}`}
+        >
+          {children({ ...d })}
+        </div>
+      ))}
     </Container>
   );
 }
