@@ -1,11 +1,5 @@
 import { DATA_USA_API } from '../config/endpoints';
-import {
-  CardData,
-  FiltersForm,
-  Measurement,
-  Measurements,
-  MeasuresFilter,
-} from '../types';
+import { CardData, FiltersForm, Measurement, Measurements, MeasuresFilter } from '../types';
 
 export const buildUrl = ({ year, measures, period }: FiltersForm): string => {
   const url = new URL(DATA_USA_API);
@@ -32,10 +26,10 @@ const measuresReducer =
   (accumulate: ReduceReturnType, measure: Measurement): ReduceReturnType => {
     const stateId: string = measure['ID State'];
     if (stateId in accumulate.info) {
-      const [
-        { [measureFilter]: lastMeasure },
-        { [measureFilter]: firstMeasure },
-      ]: [Measurement, Measurement] = [accumulate.info[stateId], measure];
+      const [{ [measureFilter]: lastMeasure }, { [measureFilter]: firstMeasure }]: [
+        Measurement,
+        Measurement
+      ] = [accumulate.info[stateId], measure];
 
       accumulate.cardsData.push({
         state: measure.State,
@@ -56,7 +50,10 @@ export const postProcessMeasures = (
 ): CardData[] => {
   const { cardsData }: ReduceReturnType = measures.reduce<ReduceReturnType>(
     measuresReducer(measureFilter),
-    { info: {}, cardsData: [] }
+    {
+      info: {},
+      cardsData: [],
+    }
   );
 
   cardsData.sort(cardsSorter);

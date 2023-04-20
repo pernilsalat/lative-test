@@ -20,9 +20,10 @@ function App(): JSX.Element {
 
   const { data, loading }: ResponseState<Measurements> = useFetchMesures(form);
 
-  const cardsData: CardData[] = useMemo<CardData[]>(() => {
-    return postProcessMeasures(data || [], form.measures);
-  }, [data]);
+  const cardsData: CardData[] = useMemo<CardData[]>(
+    () => postProcessMeasures(data || [], form.measures),
+    [data]
+  );
 
   return (
     <div className='app'>
@@ -40,9 +41,7 @@ function App(): JSX.Element {
       <div className='results p-3 overflow-auto d-flex justify-content-center'>
         {loading && <div className='text-white'>loading...</div>}
         {!loading && (
-          <Grid<CardData> data={cardsData}>
-            {(cardData: CardData) => <Card {...cardData} />}
-          </Grid>
+          <Grid<CardData> data={cardsData}>{(cardData: CardData) => <Card {...cardData} />}</Grid>
         )}
       </div>
     </div>

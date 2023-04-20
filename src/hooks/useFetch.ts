@@ -31,10 +31,7 @@ const fetchReducer = <T>(state: State<T>, action: Action<T>): State<T> => {
   }
 };
 
-export function useFetch<T = unknown>(
-  url: string,
-  options?: Options<T>
-): State<T> {
+export function useFetch<T = unknown>(url: string, options?: Options<T>): State<T> {
   const dataParser = options?.dataParser || identity;
   const [state, dispatch]: [State<T>, Dispatch<Action<T>>] = useReducer(
     fetchReducer<T>,

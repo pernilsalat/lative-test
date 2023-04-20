@@ -2,10 +2,7 @@ export type ValueOf<T> = T[keyof T];
 
 export type NotEmpty<T> = {} extends T ? never : T;
 
-export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
-  T,
-  Exclude<keyof T, Keys>
-> &
+export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<T, Exclude<keyof T, Keys>> &
   {
     [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>;
   }[Keys];
@@ -16,10 +13,7 @@ export interface ResponseState<T> {
   loading: boolean;
 }
 
-export type MeasuresFilter =
-  | 'Household Income'
-  | 'Population'
-  | 'Property Value';
+export type MeasuresFilter = 'Household Income' | 'Population' | 'Property Value';
 
 type ExtraMeasurement = Record<MeasuresFilter, number>;
 export interface BaseMeasurement {
