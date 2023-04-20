@@ -68,6 +68,7 @@
     "react-hooks/exhaustive-deps": "off",
     "import/prefer-default-export": "off",
     "react/no-array-index-key": "off",
+    "no-plusplus": "off",
     // Enforce the use of the shorthand syntax.
     "object-shorthand": "error",
     "no-console": "warn",

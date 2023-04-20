@@ -24,7 +24,8 @@ function App(): JSX.Element {
     () => postProcessMeasures(data || [], form.measures),
     [data]
   );
-
+  const asd = data || [];
+  console.log(asd[0], asd[asd.length/2]); // eslint-disable-line
   return (
     <div className='app'>
       <div className='formPanel'>
