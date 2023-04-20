@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component case loading should not render the grid 1`] = `HTMLCollection []`;
+
+exports[`App component case loading should render the loader 1`] = `
+<div
+  class="loader text-white fs-2"
+>
+  loading...
+</div>
+`;

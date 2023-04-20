@@ -7,7 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 
 /* Styles */
 import './App.scss';
-import { useFetchMesures } from './hooks/useFetchMesures';
+import { useFetchMeasures } from './hooks/useFetchMeasures';
 import { CardData, FiltersForm, Measurements, ResponseState } from './types';
 import { Filters, initialForm } from './components/filters';
 import { Card } from './components/card';
@@ -18,14 +18,13 @@ function App(): JSX.Element {
   const [form, setForm]: [FiltersForm, Dispatch<SetStateAction<FiltersForm>>] =
     useState<FiltersForm>(initialForm);
 
-  const { data, loading }: ResponseState<Measurements> = useFetchMesures(form);
+  const { data, loading }: ResponseState<Measurements> = useFetchMeasures(form);
 
   const cardsData: CardData[] = useMemo<CardData[]>(
     () => postProcessMeasures(data || [], form.measures),
     [data]
   );
-  const asd = data || [];
-  console.log(asd[0], asd[asd.length/2]); // eslint-disable-line
+
   return (
     <div className='app'>
       <div className='formPanel'>
@@ -40,7 +39,7 @@ function App(): JSX.Element {
         </Container>
       </div>
       <div className='results p-3 overflow-auto d-flex justify-content-center'>
-        {loading && <div className='text-white'>loading...</div>}
+        {loading && <div className='loader text-white fs-2'>loading...</div>}
         {!loading && (
           <Grid<CardData> data={cardsData}>{(cardData: CardData) => <Card {...cardData} />}</Grid>
         )}
