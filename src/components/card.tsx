@@ -9,6 +9,7 @@ export function Card({ state, growth, measure }: Props): JSX.Element {
   return (
     <Container
       className={`
+        card
         square
         border
         border-secondary
@@ -24,10 +25,10 @@ export function Card({ state, growth, measure }: Props): JSX.Element {
       }}
     >
       <Col md='auto'>
-        <Row className='fs-2 fw-bold m-0'>{state}</Row>
-        <Row className='m-0'>{growth.toFixed(2)}% growth</Row>
+        <Row className='state fs-2 fw-bold m-0'>{state}</Row>
+        <Row className='growth m-0'>{growth.toFixed(2)}% growth</Row>
       </Col>
-      <Col className='d-flex justify-content-center align-items-center fs-4' md='auto'>
+      <Col className='measure d-flex justify-content-center align-items-center fs-4' md='auto'>
         ${measure.toLocaleString()}
       </Col>
     </Container>

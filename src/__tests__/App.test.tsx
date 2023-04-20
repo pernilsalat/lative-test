@@ -76,8 +76,22 @@ describe('App component', () => {
     it('should render the grid', () => {
       const { container } = render(<App />);
       const gridCollection = container.getElementsByClassName('grid');
+      const cardCollection = container.getElementsByClassName('card');
+      const state = screen.getByText('california');
+      const growth = screen.getByText('4.44% growth');
+      const measure = screen.getByText('$1,000,000');
 
       expect(gridCollection).toHaveLength(1);
+      expect(cardCollection).toHaveLength(1);
+
+      expect(state).toBeVisible();
+      expect(state).toMatchSnapshot();
+
+      expect(growth).toBeVisible();
+      expect(growth).toMatchSnapshot();
+
+      expect(measure).toBeVisible();
+      expect(measure).toMatchSnapshot();
     });
   });
 });
