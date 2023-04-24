@@ -28,7 +28,7 @@ export function Filters({ onChange }: FilterProps): JSX.Element {
       const value: FormValue = parseInt(targetValue, 10) || targetValue;
 
       onChange((prevForm: FiltersForm): FiltersForm => {
-        let newForm = prevForm;
+        let newForm: FiltersForm = prevForm;
 
         if (prevForm[title] !== value) {
           newForm = { ...prevForm, [title]: value };

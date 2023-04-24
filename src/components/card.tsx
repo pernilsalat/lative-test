@@ -9,7 +9,7 @@ export function Card({ state, growth, measure }: Props): JSX.Element {
   return (
     <Container
       className={`
-        card
+        data-card
         square
         border
         border-secondary
